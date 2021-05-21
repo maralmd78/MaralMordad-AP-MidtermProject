@@ -16,7 +16,7 @@ Maze::Maze(int r, int c)
         maze.push_back(temp);
         
     }
-    current = &maze[7][7];
+    current = &maze[0][0];
     window = newwin(row * 2 + 10, column * 2 + 10, 0, 0);
        
 }
@@ -39,38 +39,121 @@ void Maze::render()
 void Maze::check_cell_neighbors()
 {
     neighbor.clear();
-    if(current->get_row() == 0 && current->get_column() == 0)
+    if(current->get_row() == 0 && current->get_column() == 0 )
     {
-        neighbor.push_back(maze[0][1]);
-        neighbor.push_back(maze[1][0]);
+        
+        if(!maze[0][1].check_visited()) neighbor.push_back(&maze[0][1]);
+        if(!maze[1][0].check_visited()) neighbor.push_back(&maze[1][0]);
     }
     else if(current->get_row() == 0 && current->get_column() == column-1)
     {
-        neighbor.push_back(maze[0][column-2]);
-        neighbor.push_back(maze[1][column-1]);
+        if(!maze[0][column - 2].check_visited()) neighbor.push_back(&maze[0][column-2]);
+        if(!maze[1][column - 1].check_visited()) neighbor.push_back(&maze[1][column-1]);
     }
-    else if(current->get_row() == row - 1 && current->get_column() == 0)
+    else if(current->get_row() == row - 1 && current->get_column() == 0 )
     {
-        neighbor.push_back(maze[row - 2][0]);
-        neighbor.push_back(maze[row - 1][1]);
+        if(!maze[row - 2][0].check_visited()) neighbor.push_back(&maze[row - 2][0]);
+        if(!maze[row - 1][1].check_visited()) neighbor.push_back(&maze[row - 1][1]);
     }
     else if(current->get_row() == row - 1 && current->get_column() == column - 1 )
     {
-        neighbor.push_back(maze[row - 2][column - 1]);
-        neighbor.push_back(maze[row - 1][column - 2]);
+        if(!maze[row - 2][column - 1].check_visited()) neighbor.push_back(&maze[row - 2][column - 1]);
+        if(!maze[row - 1][column - 2].check_visited()) neighbor.push_back(&maze[row - 1][column - 2]);
+    }
+    else if(current->get_row() == 0)
+    {
+        if(!maze[current->get_row()][current->get_column() - 1].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() - 1]);
+        if(!maze[current->get_row()][current->get_column() + 1].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() + 1 ]);
+        if(!maze[current->get_row() + 1][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() + 1 ][current->get_column()]);
+    }
+    else if(current->get_row() == row - 1)
+    {
+        if(!maze[current->get_row() - 1 ][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() - 1 ][current->get_column()]);
+        if(!maze[current->get_row()][current->get_column() - 1].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() - 1]);
+        if(!maze[current->get_row()][current->get_column() + 1].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() + 1 ]);
+    }
+    else if(current->get_column() == 0)
+    {
+        if(!maze[current->get_row() - 1 ][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() - 1 ][current->get_column()]);
+        if(!maze[current->get_row()][current->get_column() + 1].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() + 1 ]);
+        if(!maze[current->get_row() + 1 ][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() + 1 ][current->get_column()]);
+    }
+    else if(current->get_column() == column - 1)
+    {
+        if(!maze[current->get_row() - 1][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() - 1 ][current->get_column()]);
+        if(!maze[current->get_row()][current->get_column() - 1].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() - 1]);
+        if(!maze[current->get_row() + 1][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() + 1 ][current->get_column()]);
+    
     }
     else
     {
-       // neighbor.push_back([maze[current->get_row()-1][current->get_column()]);
+        
+        if(!maze[current->get_row() - 1 ][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() - 1 ][current->get_column()]);
+        if(!maze[current->get_row()][current->get_column() - 1 ].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() - 1]);
+        if(!maze[current->get_row()][current->get_column() + 1 ].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() + 1 ]);
+        if(!maze[current->get_row() + 1][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() + 1 ][current->get_column()]);
     }
 
-    for(int i{}; i < neighbor.size(); i++)
-    {
-        neighbor[i].show(window);
-    }
-    refresh();
-    wrefresh(window);
+    
 }
+
+Cell* Maze::find_nextCell()
+{
+    if(neighbor.size() == 0)
+        return nullptr;
+    srand (time(NULL));
+    int temp = rand() % neighbor.size();
+    return neighbor[temp];
+}
+void Maze::remove_wall(Cell* c, Cell* n)
+{
+    if(c->get_row() == n->get_row() && c->get_column() < n->get_column())
+    {
+        c->remove_wall_right();
+        n->remove_wall_left();
+    }
+    else if(c->get_row() == n->get_row() && c->get_column() > n->get_column())
+    {
+        c->remove_wall_left();
+        n->remove_wall_right();
+    }
+    else if(c->get_column() == n->get_column() && c->get_row() < n->get_row())
+    {
+        c->remove_wall_down();
+        n->remove_wall_up();
+    }
+    else if(c->get_column() == n->get_column() && c->get_row() > n->get_row())
+    {
+        c->remove_wall_up();
+        n->remove_wall_down();
+    }
+}
+
+void Maze::generate_maze()
+{
+    while (true) {
+        current->set_visited(true);
+        check_cell_neighbors();
+        Cell* next = find_nextCell();
+
+        if (next != nullptr) {
+            next->set_visited(true);
+            path.push(current);
+            remove_wall(current, next);
+            current = next;
+        } 
+        else if (path.size() > 0) {
+            current = path.top();
+            path.pop();
+        } 
+        else if (path.size() == 0) {
+            break;
+        }
+        
+        
+  }
+}
+
 
 
 

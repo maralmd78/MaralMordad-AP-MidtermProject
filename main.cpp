@@ -28,8 +28,9 @@ int main()
     // getch();
     // endwin();
     initscr();
-    Maze maze{8, 8};
-    maze.check_cell_neighbors();
+    Maze maze{7, 5};
+    maze.generate_maze();
+    maze.render();
     getch();
     endwin();
 
