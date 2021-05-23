@@ -18,6 +18,7 @@ Maze::Maze(int r, int c)
     }
     current = &maze[0][0];
     window = newwin(row * 2 + 10, column * 2 + 10, 0, 0);
+    srand (time(NULL));
        
 }
 
@@ -101,10 +102,10 @@ Cell* Maze::find_nextCell()
 {
     if(neighbor.size() == 0)
         return nullptr;
-    srand (time(NULL));
     int temp = rand() % neighbor.size();
     return neighbor[temp];
 }
+
 void Maze::remove_wall(Cell* c, Cell* n)
 {
     if(c->get_row() == n->get_row() && c->get_column() < n->get_column())
@@ -148,11 +149,13 @@ void Maze::generate_maze()
         } 
         else if (path.size() == 0) {
             break;
-        }
-        
-        
-  }
+        }   
+    }
+    
+
 }
+
+
 
 
 

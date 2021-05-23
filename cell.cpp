@@ -34,7 +34,7 @@ Cell::Cell(Cell&& c)
     this->wall_right = c.wall_right;
 }
 
-bool Cell::check_visited()
+bool Cell::check_visited() const
 {
     return this->is_visited;
 }
@@ -46,7 +46,7 @@ void Cell::remove_wall_up()
 
 void Cell::remove_wall_down()
 {
-    this->wall_up = false;
+    this->wall_down = false;
 }
 
 void Cell::remove_wall_left()
@@ -58,19 +58,19 @@ void Cell::remove_wall_right()
 {
     this->wall_right = false;
 }
-bool Cell::check_wall_up()
+bool Cell::check_wall_up() const
 {
     return this->wall_up;
 }
-bool Cell::check_wall_down()
+bool Cell::check_wall_down() const
 {
     return this->wall_down;
 }
-bool Cell::check_wall_left()
+bool Cell::check_wall_left() const
 {
     return this->wall_left;
 }
-bool Cell::check_wall_right()
+bool Cell::check_wall_right() const
 {
     return this->wall_right;
 }
@@ -80,12 +80,12 @@ void Cell::set_visited(bool v)
     is_visited = v;
 }
 
-int Cell::get_column()
+int Cell::get_column() const
 {
     return this->column;
 }
 
-int Cell::get_row()
+int Cell::get_row() const
 {
     return this->row;
 }

@@ -9,18 +9,18 @@ class Cell {
         Cell(const Cell&);
         Cell(Cell&& c);
         Cell() = default;
-        bool check_visited();
+        bool check_visited() const;
         void remove_wall_up();
         void remove_wall_down();
         void remove_wall_right();
         void remove_wall_left();
-        bool check_wall_up();
-        bool check_wall_down();
-        bool check_wall_left();
-        bool check_wall_right();
+        bool check_wall_up() const;
+        bool check_wall_down() const;
+        bool check_wall_left() const;
+        bool check_wall_right() const;
         void set_visited(bool);
-        int get_row();
-        int get_column();
+        int get_row() const;
+        int get_column() const;
         void show(WINDOW* win);
         
         
