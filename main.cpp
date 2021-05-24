@@ -2,37 +2,35 @@
 #include "cell.h"
 #include "maze.h"
 #include "ncurses.h"
+#include "bfssolver.h"
 
 
 int main()
 {
-    // initscr();
-    // WINDOW *win;
-    // win = newwin(1 * 2 + 10, 1 * 2 + 10, 0, 0);
-    // wmove(win, 0, 0);
-    // whline(win, '_', 1);
-    // wmove(win, 1, 0);
-    // whline(win, '_', 1);
-    // wmove(win, 5, 5);
-    // whline(win, '_', 1);
-    // refresh();
-    // wrefresh(win);
-    // getch();
-    // endwin();
-    //
+    
 
 
-    // initscr();
-    // Maze maze{8, 8};
-    // maze.render();
-    // getch();
-    // endwin();
+    
     initscr();
-    Maze maze{7, 5};
+    Maze maze{30, 50};
     maze.generate_maze();
-    maze.render();
+    //const Cell cell{3,2};
+   // maze.render(&cell);
+    
+    BFSSolver bfs{maze};
+    bfs.render();
     getch();
     endwin();
+    // auto path = bfs.bfs_maze_solver();
+    // for(auto cell : path)
+    //     std::cout << cell->get_row() << "   " << cell->get_column() << std::endl;
+    
+
+    // std::cout << bfs.level[&bfs.maze->maze[5][5]] << std::endl;
+
+    
+    
+
 
     
  

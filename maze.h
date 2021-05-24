@@ -13,16 +13,16 @@ class Maze{
     public:
     Maze(int r,int c);
     void check_cell_neighbors(); 
-    void render();
+    void render(const Cell*) const;
     Cell* find_nextCell();
     void remove_wall(Cell*, Cell*);
     void generate_maze();
     Matrix maze;
+    int row, column;
 
     
 
     private:
-    int row, column;
     WINDOW *window;
     std::vector<Cell*> neighbor;
     Cell* current;

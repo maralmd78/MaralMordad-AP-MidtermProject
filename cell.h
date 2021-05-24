@@ -21,7 +21,7 @@ class Cell {
         void set_visited(bool);
         int get_row() const;
         int get_column() const;
-        void show(WINDOW* win);
+        void show(WINDOW* win) const;
         
         
    

@@ -92,7 +92,8 @@ int Cell::get_row() const
 
 
 
-void Cell::show(WINDOW* win) {
+void Cell::show(WINDOW* win) const
+{
   if (wall_up) {
     wmove(win, row, (column + 2) + (column));
     whline(win, '_', 1);

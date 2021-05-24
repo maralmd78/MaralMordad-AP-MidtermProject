@@ -22,8 +22,9 @@ Maze::Maze(int r, int c)
        
 }
 
-void Maze::render()
+void Maze::render(const Cell* cell) const
 {
+    werase(window);
     for (int i{}; i < this->row; i++)
     {
         for(int j{}; j < this->column; j++)
@@ -32,6 +33,7 @@ void Maze::render()
             
         }   
     }
+    wmove(window, cell->get_row() + 1, (cell->get_column() + 2) + (cell->get_column()));
     refresh();
     wrefresh(window);
     
@@ -154,6 +156,8 @@ void Maze::generate_maze()
     
 
 }
+
+
 
 
 

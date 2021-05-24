@@ -24,3 +24,62 @@ std::vector<const Cell*> BFSSolver::adjacency(const Cell* cell)
     return adj;
 
 }
+
+void BFSSolver::execute()
+{
+    const Cell* start = &maze->maze[0][0];
+    std::vector<const Cell*> frontier;
+    level[start] = 0;
+    parent[start] = nullptr;
+    int i = 1;
+    frontier.push_back(start);
+    while(!frontier.empty())
+    {
+        std::vector<const Cell*> next;
+        for(auto u : frontier)
+        {
+            for(auto v: adjacency(u))
+            {
+                if(level.find(v) == level.end())
+                {
+                    level[v] = i;
+                    parent[v] = u;
+                    next.push_back(v);
+                }
+            }
+        }
+        frontier.clear();
+        frontier = next;
+        i += 1;
+    }
+
+
+}
+
+std::vector<const Cell*> BFSSolver::bfs_maze_solver()
+{
+    execute();
+    const Cell* end = &maze->maze[maze->maze.size() - 1 ][maze->maze[0].size() - 1 ];
+    std::vector<const Cell*> solve_path;
+    solve_path.push_back(end);
+    while(parent[end] != nullptr)
+    {
+        end = parent[end];
+        solve_path.push_back(end);
+
+    }
+
+    std::reverse(solve_path.begin(), solve_path.end());
+    return solve_path;
+
+
+}
+
+void BFSSolver::render()
+{
+    auto path = bfs_maze_solver();
+    for(auto cell : path){
+        this->maze->render(cell);
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    }
+}
