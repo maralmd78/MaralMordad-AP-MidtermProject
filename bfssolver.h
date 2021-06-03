@@ -16,23 +16,13 @@ class BFSSolver{
         void render();
 
 
-
-
     private:
         void execute();
         std::map<const Cell*, int> level;
         std::map<const Cell*, const Cell*> parent;
         const Maze* maze;
 
-
-    
-
-
 };
-
-
-
-
 
 
 #endif

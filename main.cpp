@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "cell.h"
 #include "maze.h"
 #include "ncurses.h"
@@ -8,32 +9,32 @@
 
 int main()
 {
+    int row, column;
+    std::string algorithm_name; 
+    std::cout << "please enter row and column of maze" << std::endl;
+    std::cin >> row >> column;
+    std::cout << "please select an algorithm between BFS and DFS" << std::endl;
+    std::cin >> algorithm_name;
     initscr();
-    Maze maze{10, 10};
+    Maze maze{row, column};
     maze.generate_maze();
-    //const Cell cell{3,2};
-   // maze.render(&cell);
-    
-    BFSSolver bfs{maze};
-    DFSSolver dfs{maze};
-    // bfs.render();
-    dfs.dfs_solver();
+    if(algorithm_name == "BFS")
+    {
+        BFSSolver bfs{maze};
+        bfs.render();
+    }
+    else if(algorithm_name == "DFS")
+    {
+        DFSSolver dfs{maze};
+        dfs.dfs_solver();
+
+    }
+    else{
+        std::cout << "invalid!" << std::endl;
+    }
+ 
     getch();
     endwin();
-    // auto path = bfs.bfs_maze_solver();
-    // for(auto cell : path)
-    //     std::cout << cell->get_row() << "   " << cell->get_column() << std::endl;
     
-
-    // std::cout << bfs.level[&bfs.maze->maze[5][5]] << std::endl;
-
-    
-    
-
-
-    
- 
-
-
     return 0;
 }

@@ -21,8 +21,6 @@ Cell::Cell(const Cell& c)
     this->wall_right = c.wall_right;
 }
 
-
-
 Cell::Cell(Cell&& c)
 {
     this->row = c.row;
@@ -90,14 +88,12 @@ int Cell::get_row() const
     return this->row;
 }
 
-
-
 void Cell::show(WINDOW* win) const
 {
   if (wall_up) {
     wmove(win, row, (column + 2) + (column));
     whline(win, '_', 1);
-  }
+    }
 
   if (wall_right) {
     wmove(win, row + 1, (column + 3) + (column));

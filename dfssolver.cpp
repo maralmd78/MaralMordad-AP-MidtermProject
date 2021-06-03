@@ -15,7 +15,6 @@ DFSSolver::DFSSolver(const Maze& maze)
 
     start = &this->maze->maze[0][0];
     end = &this->maze->maze[this->maze->maze.size() - 1 ][this->maze->maze[0].size() - 1 ];
-
 }
 
 std::vector<const Cell*> DFSSolver::adjacency(const Cell* cell)
@@ -33,14 +32,11 @@ std::vector<const Cell*> DFSSolver::adjacency(const Cell* cell)
     if(!cell->check_wall_right())
         adj.push_back(&(maze->maze[cell->get_row()][cell->get_column() + 1]));
 
-    
     return adj;
-
 }
 
 void DFSSolver::dfs(const Cell* cell)
 {
-    
     visit.push_back(cell);
     marked[cell->get_row()][cell->get_column()] = true;
     if(cell == end)
@@ -56,29 +52,6 @@ void DFSSolver::dfs(const Cell* cell)
 
         }
     }
-
-
-
-
-    // path.push_back(cell);
-    // visit.push_back(cell);
-    // if(cell == end)
-    //     return;
-    // std::vector<const Cell*> neighbors = adjacency(cell);
-    // bool has_unvisit_neighbor = false;
-    // for(const auto neighbor : neighbors)
-    // {
-    //     if(!(std::find(visit.begin(), visit.end(), neighbor) != visit.end()))
-    //     {
-    //         has_unvisit_neighbor = true;
-    //         dfs(neighbor);
-    //     }
-    // }
-    // if(!has_unvisit_neighbor)
-    // {
-    //     path.pop_back();
-    // }
-  
 }
 
 void DFSSolver::dfs_solver()
@@ -88,7 +61,7 @@ void DFSSolver::dfs_solver()
         this->maze->render(cell);
         if(cell == end)
             break;
-        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
     }
 }

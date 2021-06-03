@@ -25,14 +25,7 @@ class DFSSolver{
         const Cell* end;
         const Cell* start;
         std::vector<const Cell*> path;
-
-
-
-
-
-        
+       
 };
-
-
 
 #endif

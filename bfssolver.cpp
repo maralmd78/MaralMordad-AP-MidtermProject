@@ -22,7 +22,6 @@ std::vector<const Cell*> BFSSolver::adjacency(const Cell* cell)
 
     
     return adj;
-
 }
 
 void BFSSolver::execute()
@@ -52,8 +51,6 @@ void BFSSolver::execute()
         frontier = next;
         i += 1;
     }
-
-
 }
 
 std::vector<const Cell*> BFSSolver::bfs_maze_solver()
@@ -62,17 +59,15 @@ std::vector<const Cell*> BFSSolver::bfs_maze_solver()
     const Cell* end = &maze->maze[maze->maze.size() - 1 ][maze->maze[0].size() - 1 ];
     std::vector<const Cell*> solve_path;
     solve_path.push_back(end);
+    
     while(parent[end] != nullptr)
     {
         end = parent[end];
         solve_path.push_back(end);
-
     }
 
     std::reverse(solve_path.begin(), solve_path.end());
     return solve_path;
-
-
 }
 
 void BFSSolver::render()
@@ -80,6 +75,6 @@ void BFSSolver::render()
     auto path = bfs_maze_solver();
     for(auto cell : path){
         this->maze->render(cell);
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 }

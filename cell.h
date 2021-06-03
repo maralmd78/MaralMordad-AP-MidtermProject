@@ -24,8 +24,6 @@ class Cell {
         void show(WINDOW* win) const;
         
         
-   
-
     private:
         bool is_visited;
         int row, column;
@@ -37,9 +35,6 @@ class Cell {
 
 
 };
-
-
-
 
 
 #endif

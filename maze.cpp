@@ -5,7 +5,6 @@ Maze::Maze(int r, int c)
     this->row = r;
     this->column = c;
     
-
     for (int i{}; i < this->row; i++)
     {
         std::vector<Cell> temp;
@@ -13,8 +12,7 @@ Maze::Maze(int r, int c)
         {
             temp.push_back(Cell{i, j});
         }
-        maze.push_back(temp);
-        
+        maze.push_back(temp);    
     }
     current = &maze[0][0];
     window = newwin(row * 2 + 10, column * 2 + 10, 0, 0);
@@ -35,8 +33,7 @@ void Maze::render(const Cell* cell) const
     }
     wmove(window, cell->get_row() + 1, (cell->get_column() + 2) + (cell->get_column()));
     refresh();
-    wrefresh(window);
-    
+    wrefresh(window);  
 }
 
 void Maze::check_cell_neighbors()
@@ -89,15 +86,12 @@ void Maze::check_cell_neighbors()
     
     }
     else
-    {
-        
+    { 
         if(!maze[current->get_row() - 1 ][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() - 1 ][current->get_column()]);
         if(!maze[current->get_row()][current->get_column() - 1 ].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() - 1]);
         if(!maze[current->get_row()][current->get_column() + 1 ].check_visited()) neighbor.push_back(&maze[current->get_row()][current->get_column() + 1 ]);
         if(!maze[current->get_row() + 1][current->get_column()].check_visited()) neighbor.push_back(&maze[current->get_row() + 1 ][current->get_column()]);
-    }
-
-    
+    }   
 }
 
 Cell* Maze::find_nextCell()
@@ -153,8 +147,6 @@ void Maze::generate_maze()
             break;
         }   
     }
-    
-
 }
 
 
