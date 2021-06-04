@@ -100,16 +100,18 @@ int Cell::get_row() const
     return this->row;
 }
 
-QPushButton* Cell::get_widget() const
+QPushButton* Cell::get_widget(bool focus) const
 {
-    cell_button->setText("");
+    std::string styleSheet = "";
+
+    if(focus)
+        styleSheet += "background-color: #00ff00;";
     cell_button->setDisabled(true);
     std::string wall = "5px solid #ff0000;";
     std::string wallTop = "border-top:" + wall;
     std::string wallBottom = "border-bottom:" + wall;
     std::string wallLeft = "border-left:" + wall;
     std::string wallRight = "border-right:" + wall;
-    std::string styleSheet = "";
 
     if(this->check_wall_up())
         styleSheet += wallTop;

@@ -5,6 +5,7 @@
 #include <string>
 #include <QString>
 #include <QDebug>
+#include <QGridLayout>
 class Cell
 {
     public:
@@ -24,7 +25,7 @@ class Cell
         void set_visited(bool);
         int get_row() const;
         int get_column() const;
-        QPushButton* get_widget() const;
+        QPushButton* get_widget(bool focus = false) const;
 
 
     private:
