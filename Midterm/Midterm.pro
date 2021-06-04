@@ -12,12 +12,14 @@ SOURCES += \
     cell.cpp \
     main.cpp \
     mainwindow.cpp \
-    maze.cpp
+    maze.cpp \
+    mazesolver.cpp
 
 HEADERS += \
     cell.h \
     mainwindow.h \
-    maze.h
+    maze.h \
+    mazesolver.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

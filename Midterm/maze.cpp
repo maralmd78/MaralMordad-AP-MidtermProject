@@ -24,6 +24,7 @@ Maze::Maze(int r, int c)
     maze_widget->setShowGrid(false);
     maze_widget->resizeColumnsToContents();
     maze_widget->resizeRowsToContents();
+    maze_widget->setFocusPolicy(Qt::NoFocus);
 
     srand (time(NULL));
 
