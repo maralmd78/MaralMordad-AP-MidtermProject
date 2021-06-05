@@ -35,14 +35,15 @@ private:
     QPushButton* BFSbutton;
     QLabel* rowLabel;
     QLabel* columnLabel;
-    QHBoxLayout* mainLayout;
+    QLabel* timeLabel;
+    QGridLayout* mainLayout;
     QLineEdit* rowEdit;
     QLineEdit* columnEdit;
+    QLineEdit* timeEdit;
     QTimer* timer;
     Maze* maze;
     MazeSolver* solver;
     std::vector<const Cell*> path;
-
 
 
 public slots:
